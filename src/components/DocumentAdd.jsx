@@ -20,31 +20,39 @@ const DocumentAdd = ({agregarDoc}) => {
     const handleSubmit = (e) => {
       e.preventDefault()
       agregarDoc(document)
+      setDocument({
+        id: null,
+        codigo: '',
+        titulo: '',
+        contenido: ''
+      })
     }
 
         
   return (
-    <form onSubmit={handleSubmit} >
-      <label>Codigo</label>
+    <form onSubmit={handleSubmit}>
       <input
        type="text"
        name="codigo"
+       placeholder='Código'
+       value={document.codigo}
        onChange={handleChange}
-       value="" />
+        />
         
-      <label>Titulo</label>
       <input
        type="text" 
        name="titulo"
+       placeholder='Título'
+       value={document.titulo} 
        onChange={handleChange}
-       value="" />
+       />
         
-      <label>Contenido</label>
       <input
        type="text"
        name="contenido"
+       placeholder='Escriba un texto'
+       value={document.contenido}
        onChange={handleChange}
-       value=""
        />
 
       <button>Nuevo documento</button>
