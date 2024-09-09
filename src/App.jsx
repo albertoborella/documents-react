@@ -25,7 +25,8 @@ function App() {
       contenido: "",
     },
   ];
-  const [documents, setDocuments] = useState(docData);
+  const [documents, setDocuments] = useState(docData)
+  const [editData, setEditData] = useState(null)
 
   // Agregar un documento
   const agregarDoc = (documento) => {
@@ -36,6 +37,13 @@ function App() {
   const deleteDoc = (id) => {
     setDocuments(documents.filter((doc) => doc.id != id));
   };
+  // Editar un documento
+  const editarDocumento = (documento) => {
+    console.log(editarDocumento)
+    const newDocument = documents.map(el => el.id === documento.id ? documento : el)
+    setDocuments(newDocument)
+    setEditData(null)
+  }
 
   return (
     <div className="container">
@@ -43,11 +51,11 @@ function App() {
       <div className="flex-row">
         <div className="flex-large">
           <h2>Agregar documento</h2>
-          <DocumentAdd agregarDoc={agregarDoc} />
+          <DocumentAdd agregarDoc={agregarDoc} editarDocumento={editarDocumento} editData={editData} />
         </div>
         <div className="flex-large">
           <h2>Ver documentos</h2>
-          <DocumentsList documents={documents} deleteDoc={deleteDoc} />
+          <DocumentsList documents={documents} deleteDoc={deleteDoc} setEditData={setEditData} />
         </div>
       </div>
     </div>

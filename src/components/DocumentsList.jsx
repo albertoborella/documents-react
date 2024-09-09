@@ -1,6 +1,6 @@
 import React from "react";
 
-const DocumentsList = ({ documents, deleteDoc }) => {
+const DocumentsList = ({ documents, deleteDoc, setEditData }) => {
   return (
     <table>
       <thead>
@@ -17,7 +17,7 @@ const DocumentsList = ({ documents, deleteDoc }) => {
               <td>{doc.codigo}</td>
               <td>{doc.titulo}</td>
               <td>
-                <button className="button muted-button">Editar</button>{" "}
+                <button className="button muted-button" onClick={() => setEditData(doc)} >Editar</button>{" "}
                 <button
                   className="button muted-button"
                   onClick={() => deleteDoc(doc.id)}

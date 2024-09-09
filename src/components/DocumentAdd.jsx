@@ -1,7 +1,22 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-const DocumentAdd = ({ agregarDoc }) => {
+const DocumentAdd = ({ agregarDoc, editData, editarDocumento }) => {
+
+  useEffect(() => {
+    console.log(editData)
+    if(editData !== null){
+      setDocument(editData)
+    }else{
+      setDocument({
+        id: null,
+        codigo: "",
+        titulo: "",
+        contenido: "",
+      })
+    } 
+  }, [editData])
+
   const [document, setDocument] = useState({
     id: null,
     codigo: "",
@@ -16,14 +31,21 @@ const DocumentAdd = ({ agregarDoc }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    agregarDoc(document);
-    setDocument({
-      id: null,
-      codigo: "",
-      titulo: "",
-      contenido: "",
-    });
-  };
+
+    if(document.id !== '' && document.titulo !== '' && document.codigo !== '' && document.contenido !== ''){
+      if(editData !== null) {
+        editarDocumento(document)
+      }else{
+        agregarDoc(document);
+        setDocument({
+        id: null,
+        codigo: "",
+        titulo: "",
+        contenido: "",
+        })
+      }
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
